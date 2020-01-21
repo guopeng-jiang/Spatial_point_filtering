@@ -1,5 +1,4 @@
-# sp_pt_filtering
-A simple program for filtering spatial point data
+# A simple program for filtering spatial point data
 
 This is a part of my PhD research to develop methods to process sensor-derived data for crop management in New Zealand.
 
