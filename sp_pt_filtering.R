@@ -1,4 +1,7 @@
-# join data
+
+################################################################################
+####### Simple program for filtering spatial data points (batch process) #######
+################################################################################
 
 #### load packages
 
@@ -18,9 +21,7 @@ boundary_dir = paste0(wd, "/boundary") #---boundary file folder
 
 output_dir = paste0(wd, "/output_data") #--- output data folder
 
-#############################
 ##### read spatial data #####
-#############################
 
 # read boundary file
 bound = readOGR(boundary_dir, as.character(gsub(".shp","",list.files(boundary_dir, pattern = "\\.shp$"))))
@@ -42,10 +43,7 @@ for (i in seq(yield_list)) {
   yield_list[[i]] <- yield_list[[i]][bound_utm,]
 }  
 
-
-#################################
 ##### filter spatial points #####
-#################################
 
 #--Global Filter Algorithm--Sudduth et al. 2003
 GlobalFilter <- function(x, na.rm = TRUE, ...) {
@@ -112,9 +110,7 @@ YieldData3rd = foreach(i = seq(YieldData2nd), .combine=list, .multicombine=TRUE)
 
 stopCluster(clust_cores) 
 
-############################################
 ##### Save & extract processed data ########
-############################################
 
 for (i in seq(YieldData3rd)) {
   
@@ -129,6 +125,3 @@ for (i in seq(YieldData3rd)) {
       assign(as.character(gsub(".shp","", list.files(wd, pattern = "\\.shp$")[i])), YieldData3rd[[i]])
   # Extract each element in list into its own object
   } 
-
-
-
